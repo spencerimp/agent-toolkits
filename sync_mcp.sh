@@ -54,7 +54,7 @@ COPILOT_CLI_CONFIG="$HOME/.copilot/mcp-config.json"
 case "$(uname -s)" in
   Darwin) VSCODE_USER_SETTINGS="$HOME/Library/Application Support/Code/User/settings.json" ;;
   Linux)  VSCODE_USER_SETTINGS="$HOME/.config/Code/User/settings.json" ;;
-  *)      VSCODE_USER_SETTINGS="$HOME/Library/Application Support/Code/User/settings.json" ;;
+  *)      die "Unsupported operating system: $(uname -s)" ;;
 esac
 
 DRY_RUN=false
