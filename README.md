@@ -16,10 +16,6 @@ agent-toolkits/
 │
 ├── .claude/
 │   └── skills/                  # Skill definitions (source of truth)
-│       ├── jira/
-│       │   └── SKILL.md
-│       └── ado/
-│           └── SKILL.md
 │
 ├── AGENTS.md                    # Shared instructions (all tools)
 ├── CLAUDE.md                    # Claude Code specific instructions
@@ -43,7 +39,7 @@ Source of truth: **`.mcp.json`** (Claude Code format). Run `sync_mcp.sh` to prop
 | Tool | Path | Schema key |
 |------|------|-----------|
 | Claude Code | `~/.claude.json` | `mcpServers` |
-| VSCode Copilot | `~/Library/Application Support/Code/User/settings.json` (macOS) | `mcp.servers` |
+| VSCode Copilot | `~/Library/Application Support/Code/User/settings.json` (macOS), `~/.config/Code/User/settings.json` (Linux) | `mcp.servers` |
 | Copilot CLI | `~/.copilot/mcp-config.json` | `mcpServers` |
 
 #### Project-level
@@ -115,7 +111,6 @@ Each skill is a subdirectory with a `SKILL.md` file:
 ./sync_skills.sh --user                                      # User-level (all tools)
 ./sync_skills.sh --project --project-dir ~/proj/myapp        # Project-level (all tools)
 ./sync_skills.sh --all --project-dir ~/proj/myapp            # Both
-./sync_skills.sh --user --skill jira                         # Single skill
 ./sync_skills.sh --user --force                              # Overwrite existing
 ./sync_skills.sh --list                                      # List available skills
 ```
