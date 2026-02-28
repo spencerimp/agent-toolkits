@@ -30,6 +30,7 @@
 #                     servers start automatically without a manual "Start" click in the UI.
 #
 #   --vscode-user     ~/Library/Application Support/Code/User/settings.json  (macOS)
+#                     ~/.config/Code/User/settings.json                       (Linux)
 #                     Sets "chat.mcp.autostart": true in VSCode user settings globally,
 #                     so MCP servers auto-start across all workspaces.
 #
@@ -50,7 +51,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE="${SCRIPT_DIR}/.mcp.json"
 
 COPILOT_CLI_CONFIG="$HOME/.copilot/mcp-config.json"
-VSCODE_USER_SETTINGS="$HOME/Library/Application Support/Code/User/settings.json"
+case "$(uname -s)" in
+  Darwin) VSCODE_USER_SETTINGS="$HOME/Library/Application Support/Code/User/settings.json" ;;
+  Linux)  VSCODE_USER_SETTINGS="$HOME/.config/Code/User/settings.json" ;;
+  *)      die "Unsupported operating system: $(uname -s)" ;;
+esac
 
 DRY_RUN=false
 PROJECT_DIR=""
@@ -84,6 +89,7 @@ TARGETS:
                          [PROJECT_DIR]/.vscode/settings.json.
 
   --vscode-user          ~/Library/Application Support/Code/User/settings.json  (macOS)
+                         ~/.config/Code/User/settings.json                       (Linux)
                          Sets chat.mcp.autostart=true in VSCode user settings so MCP servers
                          auto-start globally across all workspaces.
 
